@@ -82,3 +82,4 @@ def setToIMathArray(type_traits, *in_list):
     for i in range(len(in_list)):
         array[i] = in_list[i]
     return array
+
