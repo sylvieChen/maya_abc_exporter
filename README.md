@@ -7,8 +7,8 @@ How to excute?
 1. Select mesh in maya scene
 
 2. Excute python command below:
-	from abc_add_custom_attribute.maya.export import main
-	main()
+	abc_exporter = MayaAbcExporter()
+	abc_exporter.export_selected_mesh()
 
-3. Then it will export abc file for each mesh you selected. 
-   The abc file will save to your current workspace.
+3. Then it will export abc file for each selected mesh. 
+   Save abc file to current workspace directory.
