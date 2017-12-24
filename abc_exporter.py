@@ -3,11 +3,10 @@ import maya.OpenMaya as om
 import pymel.core as pm
 from alembic.Abc import *
 
-from maya_abc_exporter.abc_attribute_writer import MeshWriter
+from maya_abc_exporter.attribute_writer import MeshWriter
 from maya_abc_exporter.archive_info import ArchiveInfo
-from maya_abc_exporter.maya_mesh_data import MeshData
+from maya_abc_exporter.mesh_data import MeshData
 from maya_abc_exporter.utils import get_dag_path_list, setToIMathArray, get_selected_obj_names
-# from maya_abc_exporter.abc_utils import setToIMathArray
 
 DEFAULT_OUT_FILENAME = 'out'
 FILE_EXTENSION = 'abc'
@@ -63,13 +62,13 @@ class MayaAbcExporter(object):
             obj_name = dag_path.partialPathName()
 
             filename = get_filepath_name(file_dir=self.output_dir, filename=obj_name)
-            print filename
 
             mesh_data = MeshData(dag_path)
             points = mesh_data.get_points()
             imath_point_array = setToIMathArray(P3fTPTraits, *points)
 
             mesh_writer = MeshWriter(dag_path=dag_path, filename=filename, archive_info=self.abc_info)
-            mesh_writer.add_attribute()
+            mesh_writer.add_attribute(prop_name="custom")
             mesh_writer.set_attribute_value(value=imath_point_array)
             mesh_writer.write_poly()
+            print 'Save to ', filename
